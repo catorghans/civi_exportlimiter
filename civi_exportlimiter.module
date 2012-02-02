@@ -1,0 +1,20 @@
+<?php
+
+function civi_exportlimiter_perm(){
+        return array('civicrm export');
+}
+
+
+function civi_exportlimiter_civicrm_searchTasks( $objectName, &$tasks ){
+        if (!user_access('civicrm export')){
+                $found = -1;
+                $wd="";
+                $newtasks = array();
+                foreach ($tasks as $nr => $task)
+                {
+                        if ($task['title'] != 'Export Contacts') $newtasks[$nr] = $task;
+                }
+                $tasks = $newtasks;
+        }
+}
+
